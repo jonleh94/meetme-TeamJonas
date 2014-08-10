@@ -36,7 +36,8 @@
 ehthumbs.db
 Thumbs.db
 
-# Inellij files #
+# Intellij files #
 #################
 .idea
-.iml
+*.iml
+target

@@ -3,11 +3,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>pictureserver</artifactId> <!-- this what we build here -->
+  <artifactId>pictureserver</artifactId>
+  <!-- this what we build here -->
   <version>1.0-SNAPSHOT</version>
-  <packaging>war</packaging>  <!-- This means we build a web archive -->
+  <packaging>war</packaging>
+  <!-- This means we build a web archive -->
 
-  <name>PictureServer</name>  <!-- Visible name -->
+  <name>PictureServer</name>
+  <!-- Visible name -->
 
   <parent>
     <groupId>de.dhbw</groupId>
@@ -31,33 +34,26 @@
       <groupId>org.codehaus.groovy</groupId>
       <artifactId>groovy-all</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.spockframework</groupId>
+      <artifactId>spock-core</artifactId>
+    </dependency>
   </dependencies>
 
   <build>
     <plugins>
+
       <plugin>
-        <groupId>org.codehaus.gmaven</groupId>
-        <artifactId>gmaven-plugin</artifactId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
       </plugin>
 
       <plugin>
-      <groupId>org.apache.tomcat.maven</groupId>
-      <artifactId>tomcat7-maven-plugin</artifactId>
-      <version>2.2</version>
+        <groupId>org.apache.tomcat.maven</groupId>
+        <artifactId>tomcat7-maven-plugin</artifactId>
+        <version>2.2</version>
         <configuration>
           <port>8087</port>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.1</version>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-          <compilerArguments>
-            <endorseddirs>${endorsed.dir}</endorseddirs>
-          </compilerArguments>
         </configuration>
       </plugin>
       <plugin>
@@ -68,6 +64,7 @@
           <failOnMissingWebXml>false</failOnMissingWebXml>
         </configuration>
       </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>

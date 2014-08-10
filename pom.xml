@@ -55,19 +55,28 @@
 
   <!-- ===== PLUGINS ====== -->
   <build>
-
     <pluginManagement>
       <plugins>
+
         <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.1</version>
           <configuration>
-            <source>1.8</source>
-            <target>1.8</target>
-            <debug>true</debug>
-            <optimize>true</optimize>
+            <compilerId>groovy-eclipse-compiler</compilerId>
           </configuration>
+          <dependencies>
+            <dependency>
+              <groupId>org.codehaus.groovy</groupId>
+              <artifactId>groovy-eclipse-compiler</artifactId>
+              <version>2.8.0-01</version>
+            </dependency>
+            <!-- for 2.8.0-01 and later you must have an explicit dependency on groovy-eclipse-batch -->
+            <dependency>
+              <groupId>org.codehaus.groovy</groupId>
+              <artifactId>groovy-eclipse-batch</artifactId>
+              <version>2.1.8-01</version>
+            </dependency>
+          </dependencies>
         </plugin>
 
         <plugin>
@@ -89,26 +98,6 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-dependency-plugin</artifactId>
           <version>2.1</version>
-        </plugin>
-
-
-        <plugin>
-          <groupId>org.codehaus.gmaven</groupId>
-          <artifactId>gmaven-plugin</artifactId>
-          <version>1.5</version>
-          <executions>
-            <execution>
-              <goals>
-                <goal>generateStubs</goal>
-                <goal>compile</goal>
-                <goal>generateTestStubs</goal>
-                <goal>testCompile</goal>
-              </goals>
-            </execution>
-          </executions>
-          <configuration>
-            <providerSelection>2.0</providerSelection>
-          </configuration>
         </plugin>
 
         <plugin>
