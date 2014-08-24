@@ -1,21 +1,26 @@
 package de.dhbw.pictureshow.domain;
 
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.MappedSuperclass;
+
 /**
  *
  */
-public class PersistentObject {
-  private final Id id;
+@MappedSuperclass
+abstract public class PersistentObject {
+  @EmbeddedId private UuidId id;
 
   public PersistentObject() {
-    id = new Id();
+    id = new UuidId();
   }
 
-  public PersistentObject(Id id) {
-    this.id = id;
-  }
-
-  public Id getId() {
+  public UuidId getId() {
     return id;
+  }
+
+  public void setId(UuidId id) {
+    this.id = id;
   }
 
   @Override

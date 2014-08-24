@@ -1,9 +1,12 @@
 package de.dhbw.pictureshow.domain;
 
 
+import javax.persistence.Entity;
+
 /**
  *
  */
+@Entity
 public class User extends PersistentObject {
   private String name;
 

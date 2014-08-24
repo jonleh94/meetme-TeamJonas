@@ -1,23 +1,28 @@
 package de.dhbw.pictureshow.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import java.io.Serializable;
 import java.util.UUID;
 
 /**
  *
  */
-public class Id {
-  private final UUID id;
+@Embeddable
+public class UuidId implements Serializable {
+  @Column(length = 2048)
+  private UUID id;
 
-  public Id() {
+  public UuidId() {
     id = UUID.randomUUID();
   }
 
-  public Id(UUID id) {
-    this.id = id;
+  public String getId() {
+    return id.toString();
   }
 
-  public UUID getId() {
-    return id;
+  public void setId(String id) {
+    this.id = UUID.fromString(id);
   }
 
   @Override
@@ -25,7 +30,7 @@ public class Id {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
 
-    Id id1 = (Id) o;
+    UuidId id1 = (UuidId) o;
 
     if (!id.equals(id1.id)) return false;
 
@@ -39,7 +44,7 @@ public class Id {
 
   @Override
   public String toString() {
-    return "Id{" +
+    return "UuidId{" +
         "id=" + id +
         '}';
   }
