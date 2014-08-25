@@ -10,19 +10,15 @@ import java.util.UUID;
  */
 @Embeddable
 public class UuidId implements Serializable {
-  @Column(length = 2048)
-  private UUID id;
+  @Column(length = 512)
+  private String id;
 
   public UuidId() {
-    id = UUID.randomUUID();
-  }
-
-  public String getId() {
-    return id.toString();
+    id = UUID.randomUUID().toString();
   }
 
   public void setId(String id) {
-    this.id = UUID.fromString(id);
+    this.id = UUID.fromString(id).toString();
   }
 
   @Override
