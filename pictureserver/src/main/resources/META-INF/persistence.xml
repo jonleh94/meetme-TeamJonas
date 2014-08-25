@@ -5,7 +5,6 @@
        http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
 
   <persistence-unit name="PictureShowDb" transaction-type="JTA">
-    <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <jta-data-source>java:jboss/datasources/pictureDb</jta-data-source>
 
     <class>de.dhbw.pictureshow.domain.User</class>
@@ -22,8 +21,13 @@
       <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
     </properties>
 
-    <!--properties>
+<!--tomee >
     <jta-data-source>pictureDatabase</jta-data-source>
+
+<-->
+
+    <!--properties>
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <non-jta-data-source>pictureDatabase</non-jta-data-source>
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
 
