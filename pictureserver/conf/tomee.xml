@@ -1,16 +1,10 @@
 <?xml version="1.0"?>
 <tomee>
-  <Resource id="pictureDatabase" type="DataSource">
-    JdbcDriver org.h2.jdbcx.JdbcDataSource
-    JdbcUrl "jdbc:h2:file:~/pictureserverdb;DB_CLOSE_DELAY=-1"
-    UserName "sa"
-    Password ""
+  <Resource id="pictureDb" type="DataSource">
+    JdbcDriver org.h2.Driver
+    JdbcUrl jdbc:h2:file:~/pictureserverdb;DB_CLOSE_DELAY=-1
+    UserName sa
+    Password
     JtaManaged true
   </Resource>
-  <!--Resource id="PostgreSQL Database" type="DataSource">
-    JdbcDriver org.postgresql.Driver
-    JdbcUrl jdbc:postgresql://localhost/test
-    UserName postgres
-    Password pass
-  </Resource-->
 </tomee>
