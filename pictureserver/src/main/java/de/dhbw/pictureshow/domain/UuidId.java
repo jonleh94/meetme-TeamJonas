@@ -13,6 +13,10 @@ public class UuidId implements Serializable {
   @Column(length = 512)
   private String id;
 
+  private UuidId(String id) {
+    this.id = id;
+  }
+
   public UuidId() {
     id = UUID.randomUUID().toString();
   }
@@ -43,5 +47,11 @@ public class UuidId implements Serializable {
     return "UuidId{" +
         "id=" + id +
         '}';
+  }
+
+  @SuppressWarnings("ResultOfMethodCallIgnored")
+  public static UuidId fromString(String id) {
+    UUID.fromString(id); // validate
+    return new UuidId(id);
   }
 }

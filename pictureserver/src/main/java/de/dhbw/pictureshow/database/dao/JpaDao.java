@@ -30,7 +30,7 @@ public abstract class JpaDao<K, E> implements Dao<K, E> {
     return entityManager.find(entityClass, id);
   }
 
-  public Collection<E> findAll() {
+  public Collection<E> list() {
     Query q = entityManager.createQuery("select e from " + entityClass.getName() + " e");
     return (Collection<E>)q.getResultList();
   }

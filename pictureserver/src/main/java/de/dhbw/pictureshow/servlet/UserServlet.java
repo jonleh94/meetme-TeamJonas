@@ -50,7 +50,7 @@ public class UserServlet extends HttpServlet {
 
       // then write the data of the response
       out.println("<body  bgcolor=\"#ffffff\">"
-          + "<h2>Hello World!</h2>" + userDao.findAll());
+          + "<h2>Hello World!</h2>" + userDao.list());
 
       String username = request.getParameter("username");
       if (username != null && username.length() > 0) {

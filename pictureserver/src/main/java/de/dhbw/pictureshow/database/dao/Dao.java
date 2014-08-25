@@ -13,5 +13,5 @@ public interface Dao<K, E> {
 
   E findById(K id);
 
-  Collection<E> findAll();
+  Collection<E> list();
 }

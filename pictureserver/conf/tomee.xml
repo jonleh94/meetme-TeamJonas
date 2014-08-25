@@ -2,7 +2,7 @@
 <tomee>
   <Resource id="pictureDb" type="DataSource">
     JdbcDriver org.h2.Driver
-    JdbcUrl jdbc:h2:file:~/pictureserverdb;DB_CLOSE_DELAY=-1
+    JdbcUrl jdbc:h2:file:~/picturedb;DB_CLOSE_DELAY=-1
     UserName sa
     Password
     JtaManaged true
