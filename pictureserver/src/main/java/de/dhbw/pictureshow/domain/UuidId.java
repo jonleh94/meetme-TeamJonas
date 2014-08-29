@@ -32,9 +32,7 @@ public class UuidId implements Serializable {
 
     UuidId id1 = (UuidId) o;
 
-    if (!id.equals(id1.id)) return false;
-
-    return true;
+    return id.equals(id1.id);
   }
 
   @Override

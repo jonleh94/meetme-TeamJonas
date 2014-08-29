@@ -61,9 +61,9 @@ class UserDaoTest extends Specification {
 
     dbTestUtil.em.getTransaction().begin();
     dao.entityManager = dbTestUtil.em
-    User u1 = createUser(dao, "u1")
-    User u2 = createUser(dao, "u2")
-    User u3 = createUser(dao, "u3")
+    createUser(dao, "u1")
+    User expectedUser = createUser(dao, "u2")
+    createUser(dao, "u3")
     dbTestUtil.em.getTransaction().commit();
     dbTestUtil.em.close()
     dbTestUtil.createEntityManager() // open clean session to avoid side effects
@@ -75,6 +75,6 @@ class UserDaoTest extends Specification {
     then:
     foundUser
     foundUser.size() == 1
-    foundUser[0].id == u2.id
+    foundUser[0].id == expectedUser.id
   }
 }

@@ -1,7 +1,6 @@
 package de.dhbw.pictureshow.servlet;
 
 import de.dhbw.pictureshow.database.dao.UserDao;
-import de.dhbw.pictureshow.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

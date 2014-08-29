@@ -1,7 +1,6 @@
 package de.dhbw.pictureshow.domain;
 
 import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
 import javax.persistence.MappedSuperclass;
 
 /**
@@ -30,9 +29,8 @@ abstract public class PersistentObject {
 
     PersistentObject that = (PersistentObject) o;
 
-    if (!id.equals(that.id)) return false;
+    return id.equals(that.id);
 
-    return true;
   }
 
   @Override
