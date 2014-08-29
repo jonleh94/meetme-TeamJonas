@@ -5,13 +5,13 @@ import java.util.Collection;
 /**
  *
  */
-public interface Dao<K, E> {
+public interface Dao<ID, TYPE> {
 
-  void persist(E entity);
+  void persist(TYPE entity);
 
-  void remove(E entity);
+  void delete(ID id);
 
-  E findById(K id);
+  TYPE get(ID id);
 
-  Collection<E> list();
+  Collection<TYPE> list();
 }

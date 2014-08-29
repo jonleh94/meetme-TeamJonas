@@ -9,7 +9,7 @@ import javax.persistence.MappedSuperclass;
  */
 @MappedSuperclass
 abstract public class PersistentObject {
-  @EmbeddedId private UuidId id;
+  @EmbeddedId protected UuidId id;
 
   public PersistentObject() {
     id = new UuidId();
@@ -38,5 +38,12 @@ abstract public class PersistentObject {
   @Override
   public int hashCode() {
     return id.hashCode();
+  }
+
+  @Override
+  public String toString() {
+    return "PersistentObject{" +
+        "id=" + id +
+        '}';
   }
 }

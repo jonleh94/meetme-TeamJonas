@@ -4,28 +4,30 @@ import de.dhbw.pictureshow.domain.User
 import de.dhbw.pictureshow.domain.UuidId
 import spock.lang.Specification
 
-import javax.persistence.EntityManager
-import javax.persistence.EntityManagerFactory
-import javax.persistence.Persistence
-import java.sql.Connection;
-import java.sql.DriverManager;
-
 /**
  *
  */
 class UserDaoTest extends Specification {
 
-  @Delegate DbTestUtil dbTestUtil = new DbTestUtil()
+  @Delegate
+  DbTestUtil dbTestUtil = new DbTestUtil()
+
+  private User createUser(UserDao dao, String name) {
+    User u = new User();
+    u.name = name
+    dao.persist(u);
+    u
+  }
 
 
   def testPersistence() {
+    setup:
+    UserDao dao = new UserDao()
+
     when:
     dbTestUtil.em.getTransaction().begin();
-    UserDao dao = new UserDao()
     dao.entityManager = dbTestUtil.em
-    User u = new User();
-    u.name = "YOP"
-    dao.persist(u);
+    User u = createUser(dao, "YOP")
     dbTestUtil.em.getTransaction().commit();
 
     then:
@@ -33,24 +35,46 @@ class UserDaoTest extends Specification {
   }
 
   def testRead() {
-    when:
-    dbTestUtil.em.getTransaction().begin();
+    setup:
     UserDao dao = new UserDao()
+    dbTestUtil.em.getTransaction().begin();
     dao.entityManager = dbTestUtil.em
-    User u = new User();
-    u.name = "YOP"
-    dao.persist(u);
+    User u = createUser(dao, "YOP")
     UuidId id = u.id
     dbTestUtil.em.getTransaction().commit();
     dbTestUtil.em.close()
     dbTestUtil.createEntityManager() // open clean session to avoid side effects
-
     dao.entityManager = dbTestUtil.em // make sure we use the new one...
-    User validateUser = dao.findById(id)
+
+    when:
+    User foundUser = dao.get(id)
 
     then:
-    validateUser
-    validateUser.id == id
-    validateUser.name == "YOP"
+    foundUser
+    foundUser.id == id
+    foundUser.name == "YOP"
+  }
+
+  def testFindByName() {
+    setup:
+    UserDao dao = new UserDao()
+
+    dbTestUtil.em.getTransaction().begin();
+    dao.entityManager = dbTestUtil.em
+    User u1 = createUser(dao, "u1")
+    User u2 = createUser(dao, "u2")
+    User u3 = createUser(dao, "u3")
+    dbTestUtil.em.getTransaction().commit();
+    dbTestUtil.em.close()
+    dbTestUtil.createEntityManager() // open clean session to avoid side effects
+    dao.entityManager = dbTestUtil.em // make sure we use the new one...
+
+    when:
+    Collection<User> foundUser = dao.findByName("u2")
+
+    then:
+    foundUser
+    foundUser.size() == 1
+    foundUser[0].id == u2.id
   }
 }

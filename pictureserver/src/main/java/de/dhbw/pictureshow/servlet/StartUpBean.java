@@ -18,13 +18,11 @@ import javax.inject.Inject;
 public class StartUpBean {
   private static final Logger log = LoggerFactory.getLogger(StartUpBean.class);
 
-
   @Inject UserDao userDao;
 
   @PostConstruct
   public void init() {
     log.info("PictureShow started.");
-//    log.debug("Init database.");
 //    User user = new User();
 //    user.setName("User1");
 //    userDao.persist(user);

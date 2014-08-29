@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  *
@@ -28,20 +30,21 @@ public class UserServlet extends HttpServlet {
   @Inject Transaction transaction;
 
 
-  @PostConstruct
-  public void initDb() {
-    log.debug("Hallo Servlet");
-  }
-
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    log.error("Hallo get");
+    log.debug("UserServlet get");
+
+    transaction.begin();
+    Collection<User> users = userDao.list();
 
     User user = new User();
-    user.setName("User1");
-    transaction.begin();
+    user.setName("User " + users.size());
     userDao.persist(user);
     transaction.commit();
+
+    users = new ArrayList<>(users); // cloning the read-only list so that we can add something
+    users.add(user);
+
 
     response.setContentType("text/html");
     response.setBufferSize(8192);
@@ -50,7 +53,11 @@ public class UserServlet extends HttpServlet {
 
       // then write the data of the response
       out.println("<body  bgcolor=\"#ffffff\">"
-          + "<h2>Hello World!</h2>" + userDao.list());
+          + "<h2>Known users:</h2>");
+
+      for(User u: users) {
+        out.println(u + "<br/>");
+      }
 
       String username = request.getParameter("username");
       if (username != null && username.length() > 0) {

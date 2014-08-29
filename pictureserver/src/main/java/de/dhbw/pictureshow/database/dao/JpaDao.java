@@ -1,5 +1,8 @@
 package de.dhbw.pictureshow.database.dao;
 
+import de.dhbw.pictureshow.domain.PersistentObject;
+import de.dhbw.pictureshow.domain.UuidId;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -8,31 +11,38 @@ import java.util.Collection;
 /**
  *
  */
-public abstract class JpaDao<K, E> implements Dao<K, E> {
-  protected Class<E> entityClass;
+public abstract class JpaDao<ID extends UuidId, TYPE extends PersistentObject> implements Dao<ID, TYPE> {
+  protected Class<TYPE> entityClass;
 
   @PersistenceContext
   protected EntityManager entityManager;
 
-  public JpaDao(Class<E> entityClass) {
-    this.entityClass = (Class<E>) entityClass;
+  public JpaDao(Class<TYPE> entityClass) {
+    this.entityClass = entityClass;
   }
 
-  public void persist(E entity) {
+  public void persist(TYPE entity) {
     entityManager.persist(entity);
   }
 
-  public void remove(E entity) {
-    entityManager.remove(entity);
+  public void delete(ID id) {
+    try {
+      TYPE entity = entityClass.newInstance();
+      entity.setId(id);
+      entityManager.remove(entity);
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
   }
 
-  public E findById(K id) {
+  public TYPE get(ID id) {
     return entityManager.find(entityClass, id);
   }
 
-  public Collection<E> list() {
+  @SuppressWarnings("unchecked")
+  public Collection<TYPE> list() {
     Query q = entityManager.createQuery("select e from " + entityClass.getName() + " e");
-    return (Collection<E>)q.getResultList();
+    return (Collection<TYPE>)q.getResultList();
   }
 
 }
