@@ -16,6 +16,7 @@ public class UserDao extends JpaDao<UuidId,User> {
     super(User.class);
   }
 
+  @SuppressWarnings("unchecked")
   Collection<User> findByName(String name) {
     Query query = entityManager.createQuery("from User u where u.name = :name");
     query.setParameter("name", name);

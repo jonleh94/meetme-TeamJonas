@@ -7,8 +7,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  *
  */
-@Entity
-@XmlRootElement
+@Entity // also add to persistence.xml !!
+@XmlRootElement // needed for REST JSON marshalling
 public class User extends PersistentObject {
   private String name;
 

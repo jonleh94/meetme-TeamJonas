@@ -8,6 +8,7 @@
     <jta-data-source>java:jboss/datasources/pictureDb</jta-data-source>
 
     <class>de.dhbw.pictureshow.domain.User</class>
+    <class>de.dhbw.pictureshow.domain.PictureInfo</class>
     <class>de.dhbw.pictureshow.domain.UuidId</class>
     <class>de.dhbw.pictureshow.domain.PersistentObject</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>

@@ -9,7 +9,7 @@ import spock.lang.Specification
  */
 class UserDaoTest extends Specification {
 
-  @Delegate
+  @Delegate // a special form of inheritance
   DbTestUtil dbTestUtil = new DbTestUtil()
 
   private User createUser(UserDao dao, String name) {

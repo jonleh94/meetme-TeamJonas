@@ -5,6 +5,7 @@
 
   <persistence-unit name="testPU" transaction-type="RESOURCE_LOCAL">
     <class>de.dhbw.pictureshow.domain.User</class>
+    <class>de.dhbw.pictureshow.domain.PictureInfo</class>
     <class>de.dhbw.pictureshow.domain.PersistentObject</class>
     <class>de.dhbw.pictureshow.domain.UuidId</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>

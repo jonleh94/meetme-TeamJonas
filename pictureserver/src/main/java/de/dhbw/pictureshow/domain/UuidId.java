@@ -47,6 +47,10 @@ public class UuidId implements Serializable {
         '}';
   }
 
+  public String asString() {
+    return id;
+  }
+
   @SuppressWarnings("ResultOfMethodCallIgnored")
   public static UuidId fromString(String id) {
     UUID.fromString(id); // validate
