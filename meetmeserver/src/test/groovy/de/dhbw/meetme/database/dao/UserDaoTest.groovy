@@ -32,7 +32,7 @@ class UserDaoTest extends Specification {
         dbTestUtil.em.getTransaction().commit();
 
         then:
-        dbTestUtil.em.contains(u)
+        dbTestUtil.em.contains(u)  // this validation step will not work with the classic dao. Instead you have to validate with the read operation.
     }
 
     def testRead() {
