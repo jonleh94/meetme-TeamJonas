@@ -178,6 +178,7 @@
 
   <modules>
     <module>meetmeserver</module>
+    <module>meetme-app</module>
   </modules>
 
 </project>
